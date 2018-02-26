@@ -104,3 +104,13 @@ div[class^='col']{
   height: 96px;
 
 }
+
+.imagen {
+  width: 100%;
+  height: 14.25%;                               
+  text-align: center;
+}
+
+.imagen img {
+width: 65%;   
+}
