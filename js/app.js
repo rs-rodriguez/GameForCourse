@@ -52,25 +52,25 @@ $(function(){
     var gameScore = {
         init: function(){
             this.createTable();
-            $(".btn-reinicio").click(this.btnStart());
+            $(".btn-reinicio").click(this.btnStart);
             //this.mostrarImagenes();
         },
-        btnStart: function(event){
+        btnStart: function(){
             $('.btn-reinicio').text('Reiniciar');
             if (indStatus === 0) {
                 indStatus = 1;
-                this.startTime();
+                gameScore.startTime();
                 //activarMovimientos();
                 //seleccionaryEliminar();
             } else {
-                this.restart();
+                gameScore.restart();
             }
         },
         restart: function(){
             var divTime = $('.time').css("display");
-            if (divTiempo ==='none'){
+            if (divTime ==='none'){
                 $('.panel-tablero').slideToggle("slow", function () {
-                    this.startTime();
+                    gameScore.startTime();;
                 });
                 $('.time').show();
                 $('.finalizacion').hide();
