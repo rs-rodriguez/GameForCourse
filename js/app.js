@@ -186,7 +186,6 @@ $(function(){
         var df = dst[1];
         var dc = dst[2];
 
-        // verificando que el cambio de divs sea el de al lado.
         var ddx = Math.abs(parseInt(sf) - parseInt(df));
         var ddy = Math.abs(parseInt(sc) - parseInt(dc));
 
@@ -213,7 +212,6 @@ $(function(){
         divMovimiento = null;
         divArrastre = null;
         actualizarMovimientos();
-        // Reseteamos el contador de combos secuenciales
         figValidas = 0;
         seleccionaryEliminar();
     }
@@ -224,7 +222,6 @@ $(function(){
     }
 
     function handleDropEvent(event, ui) {
-        //var draggable = ui.draggable; // a donde llega el div a mover
         divArrastre = event.target.id;
         console.log('DIV Final Drop: "' + divArrastre + '"!');
         console.log("DIV Inicio Drop: " + divMovimiento);
@@ -358,7 +355,6 @@ $(function(){
                             {
                                 figValidas += 1;
                                 figFin = f;
-                                console.log("Combo vertical de " + figInicio + " a " + figFin + "!");
                                 for (var ci = figInicio; ci <= figFin; ci++)
                                 {
                                     matrizObj[ci][c].enCombo = true;
@@ -386,9 +382,7 @@ $(function(){
         var esCombo = false;
         for (var f = 0; f < dimension; f++) {
             for (var c = 0; c < dimension; c++)
-                if (matrizObj[f][c].enCombo)
-                {
-                    console.log("Combo para eliminar: " + f + ',' + c);
+                if (matrizObj[f][c].enCombo){
                     esCombo = true;
                 }
         }
@@ -406,8 +400,7 @@ $(function(){
     {
         for (var f = 0; f < dimension; f++){
             for (var c = 0; c < dimension; c++){
-                if (matrizObj[f][c].enCombo)  // Celda vacia
-                {
+                if (matrizObj[f][c].enCombo){
                     matrizObj[f][c].o.animate({
                         opacity: 0
                     }, 700);
@@ -419,18 +412,15 @@ $(function(){
         $(":animated").promise().done(function () {
             eliminarenMemoria();  
          });
-       
-        console.log("finaliza aqui en eliminarImagenes");
     }
 
     function eliminarenMemoria() {
-        // mueve las celdas vacias hacia arriba.
         for (var f = 0; f < dimension; f++)
         {
             for (var c = 0; c < dimension; c++)
             {
 
-                if (matrizObj[f][c].enCombo)  // Pregunta si la celda esta vacia
+                if (matrizObj[f][c].enCombo) 
                 {
                     matrizObj[f][c].o.html("");
 
@@ -439,9 +429,7 @@ $(function(){
                     for (var sr = f; sr >= 0; sr--)
                     {
                         if (sr === 0)
-                            break; // no cambia porque es la primer fila
-
-                        // cambio de las celdas
+                            break;
                         var tmp = matrizObj[sr][c].objurl;
                         matrizObj[sr][c].objurl = matrizObj[sr - 1][c].objurl;
                         matrizObj[sr - 1][c].objurl = tmp;
@@ -452,13 +440,6 @@ $(function(){
             }
 
         }
-
-        console.log("Fin de movimiento");
-
-        //redibujando la grilla
-        //y configurando el respawn		 					
-
-        //Reseteando las celdas
         for (var f = 0; f < dimension; f++)
         {
             for (var c = 0; c < dimension; c++)
@@ -475,10 +456,7 @@ $(function(){
                     matrizObj[f][c].o.off("handleDragStart");
                     matrizObj[f][c].o.off("handleDropEvent");
                     matrizObj[f][c].o.off("handleDragStop");
-
-
                     matrizObj[f][c].respawn = false; // respawned!
-                    console.log("Respawning " + f + "," + c);
                     matrizObj[f][c].objurl = gameScore.randomImage();
 
                     matrizObj[f][c].o.html("<img src='" + matrizObj[f][c].objurl + "' alt='" + f + "," + c + "'/>");
@@ -507,11 +485,8 @@ $(function(){
             }
         }
 
-        console.log("Combo reseteados y recreados.");      
-        // Verifica si existen otros combos
         gameScore.mostrarImagenes();
         seleccionaryEliminar();
-        console.log("finaliza aqui en eliminarenMemoria");  
         gameScore.mostrarImagenes();
     }
 
