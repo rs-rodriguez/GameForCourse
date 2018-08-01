@@ -1,6 +1,6 @@
 #
-# Mi sitio web
-# as
+# Mi GAme form
+# 
 
 # Se construye sobre la base de la imagen nginx
 FROM nginx:1.15-alpine
