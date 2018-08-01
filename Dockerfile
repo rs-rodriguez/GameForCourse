@@ -9,4 +9,4 @@ FROM nginx:1.15-alpine
 LABEL Descripción="Mi Game" Autor="Samuel Guardado" Versión="v1.0.0"
 
 # Se copian los ficheros hacia la carpeta de nginx
-COPY static-html /usr/share/nginx/html
+COPY * /usr/share/nginx/html
